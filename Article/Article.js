@@ -102,7 +102,35 @@ const data = [
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+*/
+function component (object){
+  const article = document.createElement('div');
+  const title = document.createElement('h2');
+  const date = document.createElement('p');
+  const paragraph1 = document.createElement('p');
+  const paragraph2 = document.createElement('p');
+  const paragraph3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+  
+  article.append(title, date, paragraph1, paragraph2, paragraph3, expandButton);
 
+  article.classList.add('article');
+  date.classList.add('date');
+  expandButton.classList.add('expandButton');
+
+  title.textContent = object.title;
+  date.textContent = object.date;
+  paragraph1.textContent = object.firstParagraph;
+  paragraph2.textContent = object.secondParagraph;
+  paragraph3.textContent = object.thirdParagraph;
+  expandButton.textContent = 'expand';
+
+  expandButton.addEventListener('click',(event)=>{
+    article.classList.toggle('article-open');
+  })
+  return article;
+}
+/*
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: return the entire component.
@@ -111,4 +139,10 @@ const data = [
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
+
 */
+let article = document.querySelector('.articles');
+for(let i=0; i<data.length;i++){
+  article.append(component(data[i]));
+}
+
